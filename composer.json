@@ -1,0 +1,14 @@
+{
+    "name": "federicomatarrita/mapa",
+    "description": "Mapa del Área de Conservación Guanancaste",
+    "require": {
+        "twbs/bootstrap": "^4.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Federico Matarrita Arata",
+            "email": "federico@usematics.com"
+        }
+    ]
+}
