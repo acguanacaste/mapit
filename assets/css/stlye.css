@@ -1,0 +1,14 @@
+.marker{
+    background-size: cover;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.marker1 {
+    background-color: red; }
+
+.marker2 {
+    background-color: blue;
+}

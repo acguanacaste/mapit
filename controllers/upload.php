@@ -30,6 +30,7 @@ class Upload
 
         if ($this->processUpload($file)){
            $this->processRecords();
+           $this->viewRecords();
 
         }
     }
@@ -51,18 +52,31 @@ class Upload
                 do {
                     if (isset($data[0])) {
                         if ($count == 0) {
-                            foreach ($data as $unCampo)
-                                $fields[] = str_replace(" ", "_", strtolower($unCampo));
+                            foreach ($data as $unCampo) {
+                                $str = preg_replace(
+                                    '/
+                                        ^
+                                        [\pZ\p{Cc}\x{feff}]+
+                                        |
+                                        [\pZ\p{Cc}\x{feff}]+$
+                                       /ux',
+                                    '',
+                                    $unCampo
+                                );
+
+                                $fields[] = $str; //str_replace(" ", "_", strtolower($unCampo));
+                            }
                             $count++;
                         }
                         else {
-                            $fila = array_combine($fields, $data); //los arrays dentro de raw data son asociativos ahora
+
+                            $data = array_combine($fields, $data); //los arrays dentro de raw data son asociativos ahora
                             $records[] = $data;
                         }
                     }
                 } while ($data = fgetcsv($handle, 0, ",", '"'));
                 /*echo "<pre> Data:";
-                var_dump($records);
+                var_dump($records[1]);
                 echo "</pre>";*/
                 fclose($handle);
                 $this->records = $records;
@@ -76,7 +90,9 @@ class Upload
     }
 
     public function viewRecords(){
-
+        $records = $this->records;
+        $filename= $this->fileName;
+        include 'views/form.php';
     }
 
     /**
