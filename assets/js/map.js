@@ -1,28 +1,23 @@
 function loadMarkers(map,data) {
-    const bug1 = data[0]["Herbivore species"];
     let markerClasses = [];
     let typeCounter = 1;
 
     data.forEach(function (marker){
         let el = document.createElement('div');
         console.log(marker["Herbivore species"]);
-        if (markerClasses[marker["Herbivore species"]]==undefined){
-            const classNumber = "marker"+typeCounter.toString();
-            markerClasses[marker["Herbivore species"]]=classNumber;
+        if (typeof markerClasses[marker["Herbivore species"]] === 'undefined'){
+            markerClasses[marker["Herbivore species"]]="marker"+typeCounter.toString();
             typeCounter++;
         }
         el.className = "marker "+markerClasses[marker["Herbivore species"]];
 
-        var popup = new mapboxgl.Popup({ offset: 25 })
+        let popup = new mapboxgl.Popup({ offset: 25 })
             .setHTML("Voucher: "+marker['Voucher']+ "<br> Herbivore species: "+marker["Herbivore species"]);
-
-// create DOM element for the marker
-
 
         new mapboxgl.Marker(el)
             .setLngLat([marker.Longitude, marker.Latitude])
             .setPopup(popup)
-            .addTo(map)
+            .addTo(map);
 
         console.log('marker added')
     });
