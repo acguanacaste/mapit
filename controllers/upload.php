@@ -5,6 +5,9 @@ class Upload
     private $uploadFolder = "/srv/www/ACG/mapa/var/uploads/";
     public $fileName;
     public $records;
+    public $message;
+    public $link;
+
 
 
     /**
@@ -19,7 +22,7 @@ class Upload
         $fileName = time() . "-" . $fileName;
         if (file_exists($uploadFolder)) {
             if (move_uploaded_file($file['tmp_name'], $uploadFolder . $fileName)) {
-                $this->fileName = $fileName;
+                $this->setFileName($fileName);
                 return $fileName;
             }
         }
@@ -43,7 +46,7 @@ class Upload
     {
         $records = array();
         if (!empty($this->fileName)){
-            $file = $this->uploadFolder . $this->fileName;
+            $file = $this->getUploadFoder() . $this->getFileName();
             if (file_exists($file)){
                 $handle = fopen($file, 'r');
                 $count = 0;
@@ -75,11 +78,11 @@ class Upload
                         }
                     }
                 } while ($data = fgetcsv($handle, 0, ",", '"'));
-                /*echo "<pre> Data:";
+                echo "<pre> Data:";
                 var_dump($records[1]);
-                echo "</pre>";*/
+                echo "</pre>";
                 fclose($handle);
-                $this->records = $records;
+                $this->setRecords($records);
                 return $records;
             }
             else{
@@ -89,9 +92,27 @@ class Upload
         return false;
     }
 
+    public function viewAction ($file){
+        $filePath = $this->uploadFolder.$file;
+        if (file_exists($filePath)){
+            $this->setFileName($file);
+            $this->processRecords();
+            $this->viewRecords();
+        }else{
+            $this->setMessage("File $file doesn't exists!");
+        }
+
+    }
+
     public function viewRecords(){
-        $records = $this->records;
-        $filename= $this->fileName;
+        $records = $this->getRecords();
+        $filename= $this->getFileName();
+        $message = $this->getMessage();
+        $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+
+        $base = $protocol.$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT']!='80'?":".$_SERVER['SERVER_PORT']:null)."/?s=view&file=";
+        $base.=$filename;
+        $link=$base;
         include 'views/form.php';
     }
 
@@ -111,6 +132,54 @@ class Upload
     function setUploadFoder($uploadFoder)
     {
         $this->uploadFolder = $uploadFoder;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * @param mixed $fileName
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecords()
+    {
+        return $this->records;
+    }
+
+    /**
+     * @param mixed $records
+     */
+    public function setRecords($records)
+    {
+        $this->records = $records;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param mixed $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
     }
 }
 
