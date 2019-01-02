@@ -1,6 +1,7 @@
 <?php
 
 error_reporting(E_ALL);
+$_ENV['BASEFOLDER'] = __DIR__;
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/controllers/upload.php';
 require __DIR__ . '/controllers/uploadForm.php';
