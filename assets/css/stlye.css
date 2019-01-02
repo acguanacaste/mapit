@@ -6,9 +6,23 @@
     cursor: pointer;
 }
 
-.marker1 {
-    background-color: red; }
-
-.marker2 {
-    background-color: blue;
-}
+.marker1 {background-color: red;}
+.marker2 {background-color: blue;}
+.marker3 {background-color: green;}
+.marker4 {background-color: purple;}
+.marker5 {background-color: yellow;}
+.marker6 {background-color: springgreen;}
+.marker7 {background-color: mediumslateblue;}
+.marker8 {background-color: orange;}
+.marker9 {background-color: saddlebrown;}
+.marker10 {background-color: lightblue;}
+.marker11 {background-color: deeppink;}
+.marker12 {background-color: teal;}
+.marker13 {background-color: violet;}
+.marker14 {background-color: darkturquoise;}
+.marker15 {background-color: greenyellow;}
+.marker16 {background-color: navy;}
+.marker17 {background-color: mediumspringgreen;}
+.marker18 {background-color: lavender;}
+.marker19 {background-color: coral;}
+.marker20 {background-color: aqua;}
