@@ -2,14 +2,19 @@
 
 class Upload
 {
-    private $uploadFolder = "/srv/www/ACG/mapa/var/uploads/";
+    private $uploadFolder;
     public $fileName;
     public $records;
     public $message;
     public $link;
 
 
-
+    function __construct() {
+        $this->setUploadFoder($_ENV['BASEFOLDER']."/var/uploads/");
+        if (!file_exists($this->getUploadFoder())) {
+            mkdir($this->getUploadFoder(), 0775, true);
+        }
+    }
     /**
      * @param array $file
      * @return string $filename
@@ -78,9 +83,9 @@ class Upload
                         }
                     }
                 } while ($data = fgetcsv($handle, 0, ",", '"'));
-                echo "<pre> Data:";
+                /*echo "<pre> Data:";
                 var_dump($records[1]);
-                echo "</pre>";
+                echo "</pre>";*/
                 fclose($handle);
                 $this->setRecords($records);
                 return $records;
