@@ -77,6 +77,7 @@ if (!empty($message)){
 }
 ?>
 <div class="container">
+    <div id="legend"></div>
     <div id="map" class="map"></div>
 </div>
 <script>
