@@ -50,6 +50,7 @@ class Upload
     public function processRecords()
     {
         $records = array();
+        ini_set("auto_detect_line_endings", true);
         if (!empty($this->fileName)){
             $file = $this->getUploadFoder() . $this->getFileName();
             if (file_exists($file)){
