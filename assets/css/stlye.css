@@ -4,6 +4,7 @@
     height: 6px;
     border-radius: 50%;
     cursor: pointer;
+    float: left;
 }
 
 .marker1 {background-color: red;}
@@ -26,3 +27,13 @@
 .marker18 {background-color: lavender;}
 .marker19 {background-color: coral;}
 .marker20 {background-color: aqua;}
+
+#legend ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#legend ul li{
+    list-style: none;
+    margin-right: 0.5rem;
+}
