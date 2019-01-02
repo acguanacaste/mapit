@@ -18,6 +18,13 @@ switch ($action){
         }
     }
 
+    case "view":{
+        $file = $_REQUEST['file'];
+        $upload = new Upload();
+        $upload->viewAction($file);
+        break;
+    }
+
     default:{
         require 'views/form.php';
     }
