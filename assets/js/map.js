@@ -1,13 +1,17 @@
 function loadMarkers(map,data) {
     let markerClasses = [];
     let typeCounter = 1;
-
+    let legend = [];
     data.forEach(function (marker){
         let el = document.createElement('div');
         console.log(marker["Herbivore species"]);
         if (typeof markerClasses[marker["Herbivore species"]] === 'undefined'){
             markerClasses[marker["Herbivore species"]]="marker"+typeCounter.toString();
             typeCounter++;
+            legend.push({
+                species:marker["Herbivore species"],
+                color:markerClasses[marker["Herbivore species"]]
+            })
         }
         el.className = "marker "+markerClasses[marker["Herbivore species"]];
 
@@ -21,6 +25,18 @@ function loadMarkers(map,data) {
 
         console.log('marker added')
     });
+    let legendEl = document.getElementById("legend");
+    let node = document.createElement("ul");
+
+
+    legendEl.appendChild(node);
+    legend.map (item => {
+        let childItem = document.createElement("li");
+        childItem.innerHTML = `<div class="marker ${item.color}"></div><span>${item.species}</span>`;
+        node.appendChild(childItem);
+
+    });
+    legendEl.appendChild(node);
 }
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VhbmFjYXN0ZSIsImEiOiJjamowNzhuYnAwZXU2M2txczhsc21mbDVsIn0.amJMu3O1jfjcbg-B1qC7ww';
@@ -46,6 +62,8 @@ map.on("data", () => {
         map.removeLayer('toggle-sectores');
         map.removeLayer('toggle-turismo');
         map.removeLayer('toggle-unesco');
+        const nav = new mapboxgl.NavigationControl({ showCompass: false });
+        map.addControl(nav, "top-left");
         map.initialLoaded = true;
     }
 });
