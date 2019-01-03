@@ -1,7 +1,7 @@
 <html>
 <head>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/css/stlye.css" rel="stylesheet">
+    <link href="<?php echo $_ENV['BASEURL'] ?>/assets/css/stlye.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta charset='utf-8' />
@@ -24,7 +24,7 @@
 <div class="container">
     <div class="">
         <div class="col-sm-8">
-            <form method="post" action="/"  enctype="multipart/form-data" class="form-horizontal">
+            <form method="post" action="#"  enctype="multipart/form-data" class="form-horizontal">
                 <div class="form-group">
                     <label for="upload" class="col-sm-5 control-label" >Upload file:<br/> (FMP mer file or csv with a header row)</label>
                     <div class="col-sm-7">
@@ -89,7 +89,7 @@ if (!empty($message)){
         }
     ?>
 </script>
-<script src="/assets/js/map.js" type="text/javascript"></script>
+<script src="<?php echo $_ENV['BASEURL'] ?>/assets/js/map.js" type="text/javascript"></script>
 </body>
 </html>
 

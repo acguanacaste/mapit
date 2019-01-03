@@ -114,11 +114,7 @@ class Upload
         $records = $this->getRecords();
         $filename= $this->getFileName();
         $message = $this->getMessage();
-        $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
-
-        $base = $protocol.$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT']!='80'?":".$_SERVER['SERVER_PORT']:null)."/?s=view&file=";
-        $base.=$filename;
-        $link=$base;
+        $link = $_ENV['BASEURL']."?s=view&file=".$filename;
         include 'views/form.php';
     }
 

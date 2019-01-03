@@ -1,6 +1,10 @@
 <?php
 
 $_ENV['BASEFOLDER'] = __DIR__;
+$protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+$base = $protocol.$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT']!='80'?":".$_SERVER['SERVER_PORT']:null);
+$_ENV['BASEURL'] = $base.$_SERVER[REQUEST_URI];
+
 require __DIR__ . '/controllers/upload.php';
 require __DIR__ . '/controllers/uploadForm.php';
 
